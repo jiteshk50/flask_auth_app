@@ -1,0 +1,8 @@
+/* Basic styling - you can customize this further */
+body {
+    padding-top: 70px; /* Adjust if your navbar height changes */
+}
+
+.invalid-feedback {
+  display: block; /* Make error messages always visible */
+}
