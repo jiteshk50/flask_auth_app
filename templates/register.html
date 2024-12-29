@@ -2,7 +2,7 @@
 {% block title %}Register{% endblock %}
 {% block content %}
     <h1>Register</h1>
-    <form method="POST">
+    <form method="POST" onsubmit="return validatePhoneNumber()">
         {{ form.hidden_tag() }}
         <div class="mb-3">
             {{ form.name.label(class="form-label") }}
@@ -29,6 +29,7 @@
         <div class="mb-3">
             {{ form.phone_number.label(class="form-label") }}
             {{ form.phone_number(class="form-control") }}
+            <div id="phone-error" class="invalid-feedback" style="display: none;">Please enter a valid phone number.</div>
         </div>
         <div class="mb-3">
             {{ form.password.label(class="form-label") }}
@@ -54,4 +55,20 @@
         </div>
         {{ form.submit(class="btn btn-primary") }}
     </form>
+
+    <script>
+        function validatePhoneNumber() {
+            var phoneNumber = document.querySelector('input[name="phone_number"]').value;
+            var phoneRegex = /^[0-9]{10}$/; // Simple regex for 10-digit phone numbers
+            var phoneError = document.getElementById('phone-error');
+
+            if (!phoneRegex.test(phoneNumber)) {
+                phoneError.style.display = 'block';
+                return false; // Prevent form submission
+            }
+
+            phoneError.style.display = 'none';
+            return true; // Allow form submission
+        }
+    </script>
 {% endblock %}
